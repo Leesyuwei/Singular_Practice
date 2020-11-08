@@ -1,0 +1,9 @@
+clear @s blue_concrete
+clear @s red_concrete
+clear @s ender_eye
+replaceitem entity @s[team=!g1blue,tag=game1lob] container.3 blue_concrete{display:{Name:'[{"text":"加入藍隊","color":"blue","bold":"true","italic":"false"},{"text":" -按Q以操作","color":"yellow","italic":"true","bold":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看隊員","color":"yellow","italic":"true","bold":"false"}]']}}
+replaceitem entity @s[team=g1blue,tag=game1lob] container.3 blue_concrete{HideFlags:1,Enchantments:[{id:"minecraft:smite",lvl:0}],display:{Name:'[{"text":"已加入藍隊","color":"blue","bold":"true","italic":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看隊員","color":"yellow","italic":"true","bold":"false"}]']}}
+replaceitem entity @s[team=!g1red,tag=game1lob] container.4 red_concrete{display:{Name:'[{"text":"加入紅隊","color":"red","bold":"true","italic":"false"},{"text":" -按Q以操作","color":"yellow","italic":"true","bold":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看隊員","color":"yellow","italic":"true","bold":"false"}]']}}
+replaceitem entity @s[team=g1red,tag=game1lob] container.4 red_concrete{HideFlags:1,Enchantments:[{id:"minecraft:smite",lvl:0}],display:{Name:'[{"text":"已加入紅隊","color":"blue","bold":"true","italic":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看隊員","color":"yellow","italic":"true","bold":"false"}]']}}
+replaceitem entity @s[team=!g1spect,tag=game1lob] container.5 ender_eye{display:{Name:'[{"text":"加入旁觀","color":"gray","bold":"true","italic":"false"},{"text":" -按Q以操作","color":"yellow","italic":"true","bold":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看旁觀者","color":"yellow","italic":"true","bold":"false"}]']}}
+replaceitem entity @s[team=g1spect,tag=game1lob] container.5 ender_eye{HideFlags:1,Enchantments:[{id:"minecraft:smite",lvl:0}],display:{Name:'[{"text":"已加入旁觀","color":"blue","bold":"true","italic":"false"}]',Lore:['[{"text":"          -按住tab 鍵以查看旁觀者","color":"yellow","italic":"true","bold":"false"}]']}}

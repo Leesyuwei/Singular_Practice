@@ -1,0 +1,9 @@
+execute as @a[tag=game1lob,scores={game1whichmap1=1..}] run function game1_lobby:game1_mappanel/game1_mappanel1
+execute as @a[tag=game1lob,scores={game1whichmap2=1..}] run function game1_lobby:game1_mappanel/game1_mappanel2
+execute as @a[tag=game1lob,scores={game1whichmap3=1..}] run function game1_lobby:game1_mappanel/game1_mappanel3
+execute at @a[tag=game1lob] run kill @e[type=item,distance=0..2,nbt={Item:{id:"minecraft:stone_bricks",Count:1b}}]
+execute at @a[tag=game1lob] run kill @e[type=item,distance=0..2,nbt={Item:{id:"minecraft:jungle_leaves",Count:1b}}]
+execute at @a[tag=game1lob] run kill @e[type=item,distance=0..2,nbt={Item:{id:"minecraft:cod_bucket",Count:1b}}]
+scoreboard players set @p game1whichmap1 0
+scoreboard players set @p game1whichmap2 0
+scoreboard players set @p game1whichmap3 0
