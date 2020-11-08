@@ -5,7 +5,7 @@ class servo:
         self.degree=0
         self.pin=pin
         self.pin.set_analog_period(20)
-        self.angle=0
+        self.angle(0)
 
     def angle(self,idegree=None):
         if idegree==None:
@@ -17,4 +17,4 @@ class servo:
 
 servo1=servo(pin0)
 
-servo1.
+servo1.angle(90)
