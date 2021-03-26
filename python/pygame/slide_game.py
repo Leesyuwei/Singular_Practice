@@ -20,6 +20,14 @@ pygame.display.set_caption('screen')
 
 pygame.mouse.set_visible(False)
 
+score=0
+scoremsg = "Score:" + str(0)
+fail=False
+
+def gameover(message):
+    text = gameoverfont.render(message , True, (255,0,0))
+    screen.blit(text, (screen.get_width()/2 - 100, screen.get_height()/2 -20))
+    pygame.display.update()
 
 class Pad(pygame.sprite.Sprite):
     def __init__(self):
@@ -32,11 +40,9 @@ class Pad(pygame.sprite.Sprite):
         self.rect.y = screen.get_height()-30-self.image.get_height()
 
     def update(self):
-        # self.rect.x = pygame.mouse.get_pos()[0]
-        self.rect.x = self.rect.x
+        self.rect.x = pygame.mouse.get_pos()[0]
         if self.rect.x + self.image.get_width() > screen.get_width():
             self.rect.x = screen.get_width() - self.image.get_width()
-
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, speed, r, color):
@@ -57,7 +63,24 @@ class Ball(pygame.sprite.Sprite):
         self.dx = self.speed * math.cos(self.radian)
         self.dy = -self.speed * math.sin(self.radian)
         self.rect.move_ip(self.dx, self.dy)
+        global fail
 
+        if self.rect.left <= 0 or self.rect.right >= (screen.get_width()- 8):
+            self.side_edge()
+        if self.rect.top <= 10:
+            self.rect.top = 10
+            self.top_edge()
+        if self.rect.bottom >= screen.get_height() - 30:
+            fail = True
+        else:
+            fail = False
+
+    def top_edge(self):
+        self.direction = 360 - self.direction
+
+    def side_edge(self):
+        self.direction = 360 - self.direction + 180
+        
 
 allsprite = pygame.sprite.Group()
 bricks = pygame.sprite.Group()
@@ -67,6 +90,11 @@ allsprite.add(pad)
 
 ball = Ball(5, 8, (255, 0, 0))
 allsprite.add(ball)
+
+pygame.init()
+score = 0
+scorefont = pygame.font.SysFont("Arial",20)
+gameoverfont = pygame.font.SysFont("Arial",32)
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
@@ -91,11 +119,29 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+    if not fail:
+        pad.update()
+        ball.update()
 
-    pad.update()
-    ball.update()
+        if fail:
+            gameover('GAME OVER')
+            break
+
+        hitpad = pygame.sprite.collide_rect(ball,pad)
+        if hitpad:
+            ball.top_edge()
+
+        hitbrick = pygame.sprite.spritecollide(ball,bricks,True)
+        if len(hitbrick):
+            score += len(hitbrick)
+            scoremsg = "Score:" + str(score)
+            ball.rect.y += 8
+            ball.top_edge()
+
 
     screen.blit(background, (0, 0))
 
+    message = scorefont.render(scoremsg,True,(255,0,255))
+    screen.blit(message,(screen.get_width()/2 -30,screen.get_height()-30))
     allsprite.draw(screen)
     pygame.display.update()
