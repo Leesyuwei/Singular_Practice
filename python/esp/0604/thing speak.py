@@ -1,5 +1,4 @@
 import urequests as req
-from random import *
 import time
 
 while 1:
